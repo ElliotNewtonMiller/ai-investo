@@ -20,4 +20,6 @@ Process for making a change to the project! (gotta go fast so this is just a pla
 
 5. **Commit and push**. I suppose you already know how to do this.
 
-6. **Make a pull request in Bitbucket**.
+6. **(Optional) Make a pull request in Bitbucket**. You *could* just keep working in your own branch, but eventually you will want to close things out and get up-to-date with the master branch! To do that, go to the "Pull Requests" tab in Bitbucket and click to create a new one. Select the branch you created on the left and master on the right. Making a pull request allows us to review changes and fix conflicts if there are any before we merge. You can give your pull request a title, description, add a required reviewer, and there's also a checkbox to get rid of your branch once the pull request is complete (which I advise you do generally).
+
+![Pull request](https://i.imgur.com/kdJTrwX.png)
