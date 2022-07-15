@@ -16,7 +16,7 @@ Process for making a change to the project! (gotta go fast so this is just a pla
 
 4. **Make changes**. Now I just add a readme file yadda yadda.
 
-[Make changes](https://i.imgur.com/mU6BN5P.png)
+![Make changes](https://i.imgur.com/mU6BN5P.png)
 
 5. **Commit and push**. I suppose you already know how to do this.
 
