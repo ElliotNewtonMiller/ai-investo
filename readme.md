@@ -8,7 +8,7 @@ Process for making a change to the project! (gotta go fast so this is just a pla
 
 ![Branching](https://i.imgur.com/Zhx1VbB.png)
 
-2. **Run "Pull" and/or "Fetch" in VS Code**. To get the new branch and new commits from the origin, make sure to do a Pull under the source control tab in VS Code. It's in the "..." options. DO NOT use "Sync" as this will push your changes immediately and overwrite the source (I'll disable this in the future).
+2. **Run "Pull" and/or "Fetch" in VS Code**. To get the new branch and new commits from the origin, make sure to do a Pull under the source control tab in VS Code. It's in the "..." options. Don't use "Sync" for this as it will push your changes.
 
 3. **Checkout the branch in VS Code**. Now that the branch exists, you can do a git checkout of the branch to get it and edit it. "Checkout" should be an option under the source control tab in VS Code, and from there you can select your branch (which should appear as "origin/jm/readme-fix" in this example).
 
@@ -18,7 +18,7 @@ Process for making a change to the project! (gotta go fast so this is just a pla
 
 ![Make changes](https://i.imgur.com/mU6BN5P.png)
 
-5. **Commit and push**. I suppose you already know how to do this.
+5. **Commit and push**. I suppose you already know how to do this. You can use the Sync button generally speaking.
 
 6. **(Optional) Make a pull request in Bitbucket**. You *could* just keep working in your own branch, but eventually you will want to close things out and get up-to-date with the master branch! To do that, go to the "Pull Requests" tab in Bitbucket and click to create a new one. Select the branch you created on the left and master on the right. Making a pull request allows us to review changes and fix conflicts if there are any before we merge. You can give your pull request a title, description, add a required reviewer, and there's also a checkbox to get rid of your branch once the pull request is complete (which I advise you do generally).
 
