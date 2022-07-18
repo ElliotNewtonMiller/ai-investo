@@ -1,1 +1,3 @@
 config.json
+ticker_data/
+__pycache__/
