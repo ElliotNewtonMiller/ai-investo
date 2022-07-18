@@ -1,7 +1,8 @@
 import json
-import requests
+import requests as rq
 from datetime import datetime, timedelta
 from io import StringIO
+
 
 def UpdateAuthentication():
     # Open config data
@@ -29,7 +30,7 @@ def UpdateAuthentication():
         "client_id": api_key,
         "redirect_uri": "http://localhost:8080/"
         }
-        response = requests.post("https://api.tdameritrade.com/v1/oauth2/token", data = data)
+        response = rq.post("https://api.tdameritrade.com/v1/oauth2/token", data = data)
         response_json = json.load(StringIO(response.text))
         config["refresh_token"]["token"] = response_json["refresh_token"]
         config["refresh_token"]["datetime"] = str(datetime.now())
@@ -60,10 +61,45 @@ def UpdateAuthentication():
             "redirect_uri": "http://localhost:8080/"
         }
 
-        response = requests.post("https://api.tdameritrade.com/v1/oauth2/token", data = data)
+        response = rq.post("https://api.tdameritrade.com/v1/oauth2/token", data = data)
         response_json = json.load(StringIO(response.text))
         config["access_token"]["token"] = response_json["access_token"]
         config["access_token"]["datetime"] = str(datetime.now())
 
         with open("config.json", "w") as file:
             json.dump(config, file)
+
+
+
+
+def GetPriceHistories():
+    # get chosen tickers and authentication data
+    with open("tickers.txt", "r") as csv_file:
+        csv = str.split(csv_file.read(), ", ")
+        print("Tickers loaded")
+
+    with open("config.json", "r") as file:
+        config = json.load(file)
+        api_key = config["api_key"]
+        print("API key loaded")
+
+    params = {
+        "apikey": api_key,
+        "periodType": "year",
+        "period": "2",
+        "frequencyType": "daily",
+        "frequency": "1",
+        "needExtendedHoursData": "false"
+    }
+
+    # make a json file for each ticker
+    for x in csv:
+        with open("ticker_data\\" + x + ".json", "w") as new_file:
+
+            response = rq.get("https://api.tdameritrade.com/v1/marketdata/" + x + "/pricehistory", params = params)
+            response_json = json.load(StringIO(response.text))
+
+            # print(response.url)
+
+            print("Writing to " + x)
+            json.dump(response_json, new_file)
