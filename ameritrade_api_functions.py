@@ -2,13 +2,13 @@ import json
 import requests as rq
 from datetime import datetime, timedelta
 from io import StringIO
-
+from os import makedirs
+from os.path import isdir
 
 def UpdateAuthentication():
     # Open config data
     with open("config.json", "r") as file:
         config = json.load(file)
-
 
     # get api key from config
     api_key = config["api_key"]
@@ -17,7 +17,6 @@ def UpdateAuthentication():
     refresh_token = config["refresh_token"]["token"]
     rt_date = config["refresh_token"]["datetime"]
     current_rt_date = (datetime.strptime(rt_date, "%Y-%m-%d %H:%M:%S.%f"))
-
 
     # update refresh token if it expires within 10 days (access token gets updated, too)
     if current_rt_date + timedelta(days = 83) < datetime.now():
@@ -39,8 +38,6 @@ def UpdateAuthentication():
 
         with open("config.json", "w") as file:
             json.dump(config, file)
-
-
 
     # refresh config data
     with open("config.json", "r") as file:
@@ -69,9 +66,6 @@ def UpdateAuthentication():
         with open("config.json", "w") as file:
             json.dump(config, file)
 
-
-
-
 def GetPriceHistories():
     # get chosen tickers and authentication data
     with open("tickers.txt", "r") as csv_file:
@@ -91,6 +85,10 @@ def GetPriceHistories():
         "frequency": "1",
         "needExtendedHoursData": "false"
     }
+
+    # make dir if necessary
+    if not isdir("ticker_data"):
+        makedirs("ticker_data")
 
     # make a json file for each ticker
     for x in csv:
