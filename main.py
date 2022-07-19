@@ -8,6 +8,7 @@ GetPriceHistories()
 
 #make a random list of indexes and sponch them
 rng = np.random.default_rng()
-tr = sponch.convert_list_to_sponch(pd.read_json("./ticker_data/AAPL.json"), rng.integers(low=0, high=502 - 0, size=10), 90, 0.04)
+df = sponch.get_df("AAPL")
+tr = sponch.convert_list_to_sponch(df, rng.integers(low=0, high=502 - 0, size=10), 90, 0.04)
 
 print(tr)
