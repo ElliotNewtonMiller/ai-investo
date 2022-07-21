@@ -7,20 +7,29 @@ class Peep:
 
     def __init__(self, ticker):
         with open("./ticker_data/" + ticker + ".json", "r") as file:
-            candles = loads(file.read())["candles"]
-
-        self.opens = np.array([x["open"] for x in candles])
-        self.highs = np.array([x["high"] for x in candles])
-        self.lows = np.array([x["low"] for x in candles])
-        self.closes = np.array([x["close"] for x in candles])
-        self.volumes = np.array([x["volume"] for x in candles])
-        self.times = np.array([datetime.datetime.fromtimestamp(x["datetime"]/1000) for x in candles])
-
-        # Simple Moving Average - 10 day
-        self.sma10 = np.array(SMA_calc(10, self.closes))
+            _file_text= loads(file.read())
+            self.candles = _file_text["candles"]
+            self.ticker = _file_text["symbol"]
 
 
-def SMA_calc(sma_range, list_data):
+    def opens(self):
+        return np.array([x["open"] for x in self.candles])
+    def highs(self):
+        return np.array([x["high"] for x in self.candles])
+    def lows(self):
+        return np.array([x["low"] for x in self.candles])
+    def closes(self):
+        return np.array([x["close"] for x in self.candles])
+    def volumes(self):
+        return np.array([x["volume"] for x in self.candles])
+    def times(self):
+        return np.array([datetime.datetime.fromtimestamp(x["datetime"]/1000) for x in self.candles])
+    
+    def sma10(self):
+        return np.array(sma_calc(10, self.closes))
+
+
+def sma_calc(sma_range, list_data):
     sma = []
     
     for x in np.arange(len(list_data)):
